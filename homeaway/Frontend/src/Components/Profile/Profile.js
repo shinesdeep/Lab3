@@ -58,76 +58,7 @@ class Profile extends Component{
        var data = this.props.getProfileQuery;
        console.log( "this.props ", this.props , data );
        console.log( "data ", data );
-    //    axios.get('http://localhost:3001/profile',{
-    //         params: {
-    //             username: username
-    //           }
-    //     }) 
-    //     .then((response) => {
-            
-
-    //        // console.log("firstname in temp_res key",temp_resp.key )
-           
-    //         console.log("Status Code : ",response.status);
-    //         if(response.status === 200){
-    //                 //this.setState({httpres: response.data.concat(response.data) })
-    //                 console.log("Success Post");
-
-                    
-    //                 console.log(response);
-
-    //                 //console.log("username is :",response.data.username);
-
-    //                 this.setState({
-                
-    //                     firstname : response.data.firstname,
-    //                     lastname : response.data.lastname,
-    //                     email : response.data.email,
-    //                     phone : response.data.phone,
-    //                     aboutme: response.data.aboutme,
-    //                     city : response.data.city,
-    //                     company : response.data.company,
-    //                     school : response.data.school,
-    //                     home: response.data.home,
-    //                     language : response.data.language,
-    //                     gender: response.data.gender,  
-    //                     profile_pic:  response.data.profile_pic
-        
-        
-    //                 }); 
-
-    //                     if(this.state.profile_pic){
-    //                         axios.post('http://localhost:3001/download/'+this.state.profile_pic)
-    //                         .then(resp => {
-    //                         if(resp.status === 200){
-    //                             console.log("Imgae Res : ",resp);
-    //                                 let imagePreview = 'data:image/jpg;base64, ' + resp.data;
-    //                                 this.setState({
-    //                                     imageView: imagePreview
-    //                                 })
-    //                          }  
-    //                          else{
-                                  
-    //                             console.log("Error getiing response");
-    //                          }  
-                                
-    //                         })
-                               
-    //                     }
-                
-            
-
-                
-    //         }else{
-    //                 console.log("Error in Response");
-
-    //             }
-           
-            
-    //         });
-             
-
-            
+      
     
         }
 
@@ -137,85 +68,10 @@ class Profile extends Component{
                 saveEnable : true
                 
             })
-            //console.log("e,target.name", e.target.name);
-            //console.log("e,target.value", e.target.value);
+            
         }
 
-    // // //username change handler to update state variable with the text entered by the user
-    // firstnameChangeHandler = (e) => {
-    //     this.setState({
-    //         firstname : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-
-    // lastnameChangeHandler = (e) => {
-    //     this.setState({
-    //         lastname : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-    // // //email change handler to update state variable with the text entered by the user
-    // emailChangeHandler = (e) => {
-    //     this.setState({
-    //         email : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-    
-    // phoneChangeHandler = (e) => {
-    //     this.setState({
-    //         phone : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-
-    // aboutmeChangeHandler = (e) => {
-    //     this.setState({
-    //         aboutme : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-    // cityChangeHandler = (e) => {
-    //     this.setState({
-    //         city : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-    // companyChangeHandler = (e) => {
-    //     this.setState({
-    //         company : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-
-    // schoolChangeHandler = (e) => {
-    //     this.setState({
-    //         school : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-
-    // homeChangeHandler = (e) => {
-    //     this.setState({
-    //         home : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-
-    // langChangeHandler = (e) => {
-    //     this.setState({
-    //         language : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
-
-    // genderChangeHandler = (e) => {
-    //     this.setState({
-    //         gender : e.target.value,
-    //         saveEnable : true
-    //     })
-    // }
+   
 
     changeProfile = (e) => {
 
@@ -228,9 +84,7 @@ class Profile extends Component{
 
     //submit Login handler to send a request to the node backend
     saveProfile = (e) => {
-        //var headers = new Headers();
-        //prevent page from refresh
-        //let user = JSON.parse(localStorage.getItem("user_data"));
+       
         e.preventDefault();
         const data = {
             //id : user.id,
@@ -273,27 +127,7 @@ class Profile extends Component{
               ]
           
         });
-        //set the with credentials to true
-//         axios.defaults.withCredentials = true;
-//         //make a post request with the user data
-//         axios.post('http://localhost:3001/profile',data)
-//             .then(response => {
-//                 console.log("Status Code : ",response.status);
-//                 if(response.status === 200){
-//                     this.setState({
-                        
-//                         saveEnable : false
-//                     })
-//                     console.log("Register Success Post");
-//                 }else{
-                    
-//                     console.log("Success Post");
-//                     this.setState({
-                        
-//                         saveEnable : false
-//                     })
-//                 }
-//             })
+
                
   }
 
@@ -315,27 +149,14 @@ class Profile extends Component{
             loadchangeProfile = <Photoupload></Photoupload>
         }
         
-
-
-
-       
-
         return(
     
            <div>
                {redirectVar}
               
-           
-            
-            
-
-                 
-           
                  {loadchangeProfile}
             
             
-            
-
             <div className="container-profile">
                     <img  className="resize-img" src={this.state.imageView} />
                     {/* <img  className="resize-img" src="http://localhost:3001/uploads/gilberto-olimpio-780663-unsplash.jpg" /> */}
@@ -348,10 +169,6 @@ class Profile extends Component{
             <br/><br/>
 
             <div className="container">
-            
-        
-               
-
             
             <div className="profile-form"  >
                 
