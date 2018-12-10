@@ -35,16 +35,7 @@ class Profile extends Component{
         }
         //Bind the handlers to this class
         this.ChangeHandler = this.ChangeHandler.bind(this);
-        // this.lastnameChangeHandler = this.lastnameChangeHandler.bind(this);
-        // this.emailChangeHandler = this.emailChangeHandler.bind(this);
-        // this.phoneChangeHandler = this.phoneChangeHandler.bind(this);
-        // this.aboutmeChangeHandler =  this.aboutmeChangeHandler.bind(this);
-        // this.cityChangeHandler = this.cityChangeHandler.bind(this);
-        // this.companyChangeHandler = this.companyChangeHandler.bind(this);
-        // this.schoolChangeHandler =  this.schoolChangeHandler.bind(this);
-        // this.homeChangeHandler   =  this.homeChangeHandler.bind(this);
-        // this.langChangeHandler = this.langChangeHandler.bind(this);
-        // this.genderChangeHandler = this.genderChangeHandler.bind(this);
+        
 
         this.saveProfile = this.saveProfile.bind(this);
         this.changeProfile = this.changeProfile.bind(this);
@@ -139,8 +130,6 @@ class Profile extends Component{
 
         if(!cookie.load('cookie')){
             console.log("InValid Cookie, Redirect to Login");
-            //console.log("local stotage", localStorage.getItem("user_data"));
-            //localStorage.setItem("user_data",null);
             redirectVar = <Redirect to= "/login"/>
         }
         let loadchangeProfile = null;
