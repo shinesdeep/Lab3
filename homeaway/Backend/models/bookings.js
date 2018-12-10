@@ -56,9 +56,7 @@ var Bookings = mongoose.model('Bookings',{
     proptype : {
         type : String
     },
-    price : {
-        type : String
-    },
+   
     listingPic2 : {
         type : String
     },
@@ -74,9 +72,7 @@ var Bookings = mongoose.model('Bookings',{
     listingPic6 : {
         type : String
     },
-    listingPic1 : {
-        type : String
-    },
+   
 
 });
 

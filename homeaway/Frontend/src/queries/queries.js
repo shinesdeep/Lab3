@@ -1,22 +1,33 @@
 import { gql } from 'apollo-boost';
 
-const getAuthorsQuery = gql`
-    {
-        authors {
-            name
-            id
-        }
-    }
-`;
+const getTravDashQuery = gql`
 
-const getBooksQuery = gql`
-    {
-        books {
-            name
-            id
+    query($username : String){
+        gettravdash(username:$username){
+           bookingId
+           headline
+           propdes
+           listingPic1
+           price
+
         }
+ 
     }
-`;
+ `  ;
+
+ const geOwnerDashQuery = gql`
+
+    query($owner : String){
+        getownerdash(owner:$owner){
+           bookingId
+           headline
+           propdes
+           listingPic1
+           price
+        }
+ 
+    }
+ `  ;
 
 
 const getProfileQuery = gql`
@@ -43,4 +54,4 @@ const getProfileQuery = gql`
     }
  `  ;
 
-export { getAuthorsQuery, getBooksQuery,getProfileQuery};
+export { getTravDashQuery, geOwnerDashQuery,getProfileQuery};

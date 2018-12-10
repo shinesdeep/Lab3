@@ -5,7 +5,12 @@ import {Redirect} from 'react-router';
 import axios from 'axios';
 import './Navbar.css'
 import Profile from '../Profile/Profile';
+import TravDash from '../TravDash/TravDash';
+import OwnerDash from '../OwnerDash/OwnerDash';
+import Home from '../Home/Home';
+import Login from '../Login/Login';
 import {Nav, Navbar,NavDropdown,NavItem,MenuItem} from 'react-bootstrap';
+import { flattenSelections } from 'apollo-utilities';
 
 //create the Navbar Component
 class BarNav extends Component {
@@ -21,17 +26,80 @@ class BarNav extends Component {
           profile_pic: '',
           errorFlag : false,
           showprofile : false,
+          showtravel :false,
+          showownerdash : false,
+          showhome : true,
+          showlogin : false,
       }
 
       this.showProfile = this.showProfile.bind(this);
-
+      this.showTravdash = this.showTravdash.bind(this);
+      this.showOwnerdash = this.showOwnerdash.bind(this);
+      this.showHome = this.showHome.bind(this);
+      this.showLogin = this.showLogin.bind(this);
     }
 
     showProfile(e){
         e.preventDefault();
-        this.setState({showprofile:true});
+        this.setState({
+            showprofile:true,
+            showtravel:false,
+            showownerdash :false,
+            showhome : false,
+            showlogin : false
+        });
     }
     
+    showTravdash(e){
+        e.preventDefault();
+        this.setState({
+            showtravel:true,
+            showprofile:false,
+            showownerdash :false,
+            showhome : false,
+            showlogin : false
+        });
+    }
+
+    showOwnerdash(e){
+        e.preventDefault();
+        this.setState({
+            showownerdash :true,
+            showtravel:false,
+            showprofile:false,
+            showhome : false,
+            showlogin : false,
+
+        });
+    }
+
+    showHome(e){
+        this.setState({ 
+            showhome : true,
+            showprofile : false,
+            showtravel :false,
+            showownerdash : false,
+            showlogin : false,
+            
+
+        })
+        
+
+    }
+    showLogin(e){
+        this.setState({ 
+            showhome : false,
+            showprofile : false,
+            showtravel :false,
+            showownerdash : false,
+            showlogin : true,
+            
+
+        })
+        
+
+    }
+
     componentDidMount(){
         var username = cookie.load('cookie');
         //user= JSON.parse(user);
@@ -52,77 +120,6 @@ class BarNav extends Component {
 
         }
        
-      
-      
-     
-    //     axios.get('http://localhost:3001/navbar',{
-    //     params: {
-    //           username: cookie.load('cookie'),
-              
-    //     }
-    //    }) 
-    //   .then((response) => {
-  
-    //       console.log("Status Code : ",response.status);
-    //       if(response.status === 200){
-    //               console.log("Success Post");
-    //               console.log(response.data);
-    //               localStorage.setItem("username",response.data.username);
-    //               localStorage.setItem("firstname",response.data.firstname);
-    //               localStorage.setItem("lastname",response.data.lastname);
-    //               localStorage.setItem("role",response.data.role);
-    //               localStorage.setItem("profile_pic",response.data.profile_pic);
-                  
-                  
-    //               this.setState({
-                        
-    //                 username : cookie.load('cookie').username,
-    //                 firstname : response.data.firstname,
-    //                 lastname : response.data.lastname,
-    //                 role : response.data.role,
-    //                 profile_pic : response.data.profile_pic,
-    //               }) 
-
-    //       }
-    //       else
-    //       {
-                  
-    //              this.setState({errorFlag : true})
-    //              console.log("Error in Response");
-   
-    //       }
-         
-          
-    //       })
-    //       .catch((error) => {
-    //        // Error
-    //        if (error.response) {
-     
-    //            this.setState({
-    //                errorFlag : true
-    //            })
-               
-    //        } else if (error.request) {
-    //            this.setState({
-    //                errorFlag : true
-    //            })
-               
-    //            console.log(error.request);
-    //        } else {
-    //            this.setState({
-    //                errorFlag : true
-    //            })
-    //            // Something happened in setting up the request that triggered an Error
-    //            console.log('Error', error.message);
-    //        }
-    //        console.log(error.config);
-    //        this.setState({
-    //            errorFlag : true
-    //        })
-    //    });  
-         
-
-     
 
     }
     
@@ -149,7 +146,13 @@ class BarNav extends Component {
         let dashboard = null;
         let profilepic = null;
         let showProf = null;
+        let showTrav = null;
+        let showOwner = null;
+        let showHomePage = null;
+        let showLoginPage = null;
+
         var cookieVal= cookie.load('cookie');
+        //console.log("localstorage", JSON.parse(localStorage.getItem("user")));
         var userval = JSON.parse(localStorage.getItem("user"));
 
      if(cookieVal){
@@ -174,19 +177,19 @@ class BarNav extends Component {
           <Link to="/ownpost" style={{color: "#9d9d9d"}}> List Property</Link>
            </NavItem>
 
-           <NavItem  >
-           <Link to="/ownerdash" style={{color: "#9d9d9d"}}>Dashboard</Link>
+           <NavItem  onClick={this.showOwnerdash} style={{color: "#9d9d9d"}}>
+           
+           Dashboard
            </NavItem>
           
            </Nav>
 
         } else{
           rolebasednav =
-          <NavItem >
+          <NavItem  onClick={this.showTravdash} style={{color: "#9d9d9d"}}>
                 
-                <Link to="/travdash" style={{color: "#9d9d9d"}}>My Trips</Link>
-                
-                
+                My Trips
+         
               </NavItem>
          
 
@@ -224,46 +227,65 @@ class BarNav extends Component {
             console.log("username in show profile", cookie.load('cookie'));
             showProf = <Profile username={cookie.load('cookie')}></Profile>
         }
-
-        // let redirectVar = null;
-        // if(cookie.load('cookie')){
-        //     redirectVar = <Redirect to="/home"/>
-        // }
-        return(
+        if(this.state.showtravel ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showTrav = <TravDash username={cookie.load('cookie')}></TravDash>
+        }
+        if(this.state.showownerdash ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showOwner = <OwnerDash username={cookie.load('cookie')}></OwnerDash>
+        }
+        if(this.state.showhome ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showHomePage = <Home username={cookie.load('cookie')}></Home>
+        }
+       if(this.state.showlogin){
+           showLoginPage = <Login></Login>
+       }
+             
+        
+     return(
             <div>
-                {/* {redirectVar} */}
-                <Navbar className="cusnav" inverse collapseOnSelect>
-  <Navbar.Header>
-    <Navbar.Brand pullRight>
-    <Link to="/home" style={{color: "#9d9d9d"}}>Home Away</Link>
-    </Navbar.Brand>
-    <Navbar.Toggle />
-  </Navbar.Header>
-  <Navbar.Collapse>
-    <Nav>
-    <NavItem  >
-      <Link to="/home" style={{color: "#9d9d9d"}}>Home</Link>
-      
-      </NavItem>
+            {/* {redirectVar} */}
+            <Navbar className="cusnav" inverse collapseOnSelect>
+            <Navbar.Header>
+            <Navbar.Brand pullRight onClick={this.showHome} style={{color: "#9d9d9d"}}>
+            {/* showHome */}
+            {/* <Link to="/home" style={{color: "#9d9d9d"}}>Home Away</Link> */}
+            Home Away
+            </Navbar.Brand>
+            <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+            <Nav>
+            <NavItem  onClick={this.showHome} style={{color: "#9d9d9d"}} >
+                {/* <Link to="/home" style={{color: "#9d9d9d"}}>Home</Link> */}
+              Home
+            </NavItem>
       {/* eventKey={3.1} href="/profile"  */}
       {/* <NavDropdown eventKey={3} title={this.state.firstname} id="basic-nav-dropdown"  >
         <MenuItem  onClick={this.showProfile} >Profile</MenuItem> */}
-        {dashboard}
+            {dashboard}
         
         
-      {/* </NavDropdown> */}
-    </Nav>
-    <Nav pullRight>
+            {/* </NavDropdown> */}
+            </Nav>
+            <Nav pullRight>
       
       
-      {rolebasednav}
+            {rolebasednav}
       
       
-      {navLogin}
-    </Nav>
-  </Navbar.Collapse>
-</Navbar>
+                {navLogin}
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+      {showHomePage}
       {showProf}
+      {showTrav}
+      {showOwner}
+      {/* {showLoginPage} */}
+     
         </div>
         )
     }

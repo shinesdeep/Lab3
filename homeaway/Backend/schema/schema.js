@@ -1,6 +1,7 @@
 const graphql = require('graphql');
 var {mongoose} = require('../mongoose');
  var {Profiles} = require('../models/profile');
+ var {Bookings} = require('../models/bookings');
  var crypt = require('../crypt');
  var session = require('express-session');
 const {
@@ -33,6 +34,37 @@ const ProfileType = new GraphQLObjectType({
     })
 });
 
+
+const BookingType = new GraphQLObjectType({
+    name: 'booking',
+    fields: () => ({
+        bookingId : {type: GraphQLString},
+        listingId : {type: GraphQLString},
+        startDate : {type: GraphQLString},
+        endDate : {type: GraphQLString},
+        owner : {type: GraphQLString},
+        guest: {type: GraphQLString},
+        username: {type: GraphQLString},
+        price: {type: GraphQLString},
+        headline: {type: GraphQLString},
+        propdes: {type: GraphQLString},
+        bedrooms: {type: GraphQLInt},
+        accomodates: {type: GraphQLInt},
+        bathrooms: {type: GraphQLString},
+        description: {type: GraphQLString},
+        listingPic1: {type: GraphQLString},
+        proptype: {type: GraphQLString},
+        listingPic2: {type: GraphQLString},
+        listingPic3: {type: GraphQLString},
+        listingPic4: {type: GraphQLString},
+        listingPic5: {type: GraphQLString},
+        listingPic6: {type: GraphQLString},
+        
+    })
+});
+
+
+
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
@@ -43,7 +75,26 @@ const RootQuery = new GraphQLObjectType({
                 return  Profiles.findOne({username:args.username})
             }
         },
-         
+        gettravdash :{
+            type : new GraphQLList(BookingType),
+            args : {username :{type : GraphQLString}},
+            resolve(parent, args){
+                console.log("Get Traveler Dashboard",args.username);
+                return Bookings.find({
+                    username : args.username
+                })
+            }
+        } ,
+        getownerdash :{
+            type : new GraphQLList(BookingType),
+            args : {username :{type : GraphQLString}},
+            resolve(parent, args){
+                console.log("Get Owner Dashboard");
+                return Bookings.find({
+                    owner : args.username
+                })
+            }
+        } 
     }
 });
 

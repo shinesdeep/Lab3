@@ -34,59 +34,59 @@ componentDidMount(){
   this.setState({username:username}) ;
   // if(this.state.listingId)
   // {
-  axios.get('http://localhost:3001/owndash',{
-       params: {
-           username: username,
+//   axios.get('http://localhost:3001/owndash',{
+//        params: {
+//            username: username,
            
-         }
-    }) 
-   .then((response) => {
+//          }
+//     }) 
+//    .then((response) => {
 
-      // console.log("firstname in temp_res key",temp_resp.key )
+//       // console.log("firstname in temp_res key",temp_resp.key )
       
-       console.log("Status Code : ",response.status);
-       if(response.status === 200){
-               console.log("Success Post");
-               console.log(response.data);
+//        console.log("Status Code : ",response.status);
+//        if(response.status === 200){
+//                console.log("Success Post");
+//                console.log(response.data);
                
                
-              this.setState({listings : this.state.listings.concat(response.data)})
-              console.log("listings :", this.state.listings);
-       }else{
+//               this.setState({listings : this.state.listings.concat(response.data)})
+//               console.log("listings :", this.state.listings);
+//        }else{
                
-              this.setState({errorFlag : true})
-              console.log("Error in Response");
+//               this.setState({errorFlag : true})
+//               console.log("Error in Response");
 
-           }
+//            }
       
        
-       })
-       .catch((error) => {
-        // Error
-        if (error.response) {
+//        })
+//        .catch((error) => {
+//         // Error
+//         if (error.response) {
   
-            this.setState({
-                errorFlag : true
-            })
+//             this.setState({
+//                 errorFlag : true
+//             })
             
-        } else if (error.request) {
-            this.setState({
-                errorFlag : true
-            })
+//         } else if (error.request) {
+//             this.setState({
+//                 errorFlag : true
+//             })
             
-            console.log(error.request);
-        } else {
-            this.setState({
-                errorFlag : true
-            })
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-        }
-        console.log(error.config);
-        this.setState({
-            errorFlag : true
-        })
-    });  
+//             console.log(error.request);
+//         } else {
+//             this.setState({
+//                 errorFlag : true
+//             })
+//             // Something happened in setting up the request that triggered an Error
+//             console.log('Error', error.message);
+//         }
+//         console.log(error.config);
+//         this.setState({
+//             errorFlag : true
+//         })
+//     });  
         
   
 }

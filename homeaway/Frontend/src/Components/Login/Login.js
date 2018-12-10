@@ -54,6 +54,7 @@ class Login extends Component{
         }
         //set the with credentials to true
         axios.defaults.withCredentials = true;
+        localStorage.setItem("user",null);
         //make a post request with the user data
       // console.log("Sending Login Request", data);
         axios.post('http://localhost:3001/login',data)   
@@ -114,7 +115,7 @@ class Login extends Component{
         let errorlog = null;
         if(cookie.load('cookie')){
             console.log("Valid Cookie, Redirect to Home");
-            redirectVar = <Redirect to= "/home"/>
+            redirectVar = <Redirect to= "/"/>
         }
         if(this.state.errorFlag){
 

@@ -4,7 +4,8 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
-
+import {graphql, compose} from 'react-apollo';
+import { getTravDashQuery} from '../../queries/queries';
 
 class TravDash extends Component {
   constructor(props){
@@ -30,64 +31,64 @@ componentDidMount(){
 
   console.log("Inside component did mount"); 
   const username = cookie.load('cookie');
-  console.log( "Username is ", username);
+  console.log( "this.props ", this.props);
   this.setState({username:username}) ;
  
-  axios.get('http://localhost:3001/travdash',{
-       params: {
-           username: username,
+//   axios.get('http://localhost:3001/travdash',{
+//        params: {
+//            username: username,
            
-         }
-    }) 
-   .then((response) => {
+//          }
+//     }) 
+//    .then((response) => {
 
-      // console.log("firstname in temp_res key",temp_resp.key )
+//       // console.log("firstname in temp_res key",temp_resp.key )
       
-       console.log("Status Code : ",response.status);
+//        console.log("Status Code : ",response.status);
 
-       if(response.status === 200){
-               //this.setState({httpres: response.data.concat(response.data) })
-               console.log("Success Post");
-               console.log(response.data);
+//        if(response.status === 200){
+//                //this.setState({httpres: response.data.concat(response.data) })
+//                console.log("Success Post");
+//                console.log(response.data);
                
               
-              this.setState({bookings : this.state.bookings.concat(response.data)})
-              console.log("bookings :", this.state.bookings);
-       }else{
+//               this.setState({bookings : this.state.bookings.concat(response.data)})
+//               console.log("bookings :", this.state.bookings);
+//        }else{
                
-              this.setState({errorFlag : true})
-              console.log("Error in Response");
+//               this.setState({errorFlag : true})
+//               console.log("Error in Response");
 
-           }
+//            }
       
        
-       })
-       .catch((error) => {
-        // Error
-        if (error.response) {
+//        })
+//        .catch((error) => {
+//         // Error
+//         if (error.response) {
   
-            this.setState({
-                errorFlag : true
-            })
+//             this.setState({
+//                 errorFlag : true
+//             })
             
-        } else if (error.request) {
-            this.setState({
-                errorFlag : true
-            })
+//         } else if (error.request) {
+//             this.setState({
+//                 errorFlag : true
+//             })
             
-            console.log(error.request);
-        } else {
-            this.setState({
-                errorFlag : true
-            })
-            // Something happened in setting up the request that triggered an Error
-            console.log('Error', error.message);
-        }
-        console.log(error.config);
-        this.setState({
-            errorFlag : true
-        })
-    });  
+//             console.log(error.request);
+//         } else {
+//             this.setState({
+//                 errorFlag : true
+//             })
+//             // Something happened in setting up the request that triggered an Error
+//             console.log('Error', error.message);
+//         }
+//         console.log(error.config);
+//         this.setState({
+//             errorFlag : true
+//         })
+//     });  
         
   
 }
@@ -104,10 +105,10 @@ componentDidMount(){
   let showmodify = false;
 
   if(!cookie.load('cookie')){
-            console.log("Valid Cookie, Redirect to Home");
+            console.log("Valid Cookie, Redirect to Login");
             redirectVar = <Redirect to= "/login"/>
   }
-  
+  console.log("this.props", this.props);
    
 
 
@@ -117,10 +118,10 @@ componentDidMount(){
     <div>
     <h1 align="center"> Welcome! </h1>
     <h3 align="center">Your Bookings:</h3>
-    <button type="button" style={{marginLeft:"900px"}}class="btn btn-primary"><Link to="/home" style={{color: 'white'}}>Search More Property</Link> </button>
+    <button type="button" style={{marginLeft:"900px"}}class="btn btn-primary"><Link to="/" style={{color: 'white'}}>Search More Property</Link> </button>
     </div> 
 
-    if(this.state.errorFlag){
+    if(!this.props.getTravDashQuery.gettravdash){
         errorlog = 
         <div>
           <br/>
@@ -130,14 +131,14 @@ componentDidMount(){
          </div>
          </div>
       }
-       if(this.state.bookings){
+       if(this.props.getTravDashQuery.gettravdash){
     
         
     
         showlistings = 
         
            
-          this.state.bookings.map((booking,index) => {
+        this.props.getTravDashQuery.gettravdash.map((booking,index) => {
           return(
              
               <row>
@@ -218,4 +219,17 @@ componentDidMount(){
 }
 
 }
-export default TravDash;
+
+export default compose(
+   
+    graphql(getTravDashQuery, { name: "getTravDashQuery" },{
+        options : (props) => {
+            return {
+                variables : {
+                    username : props.username
+                }
+            }
+        } 
+        }),
+    
+)(TravDash);

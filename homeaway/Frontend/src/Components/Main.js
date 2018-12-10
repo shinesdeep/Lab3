@@ -14,14 +14,14 @@ class Main extends Component {
         return(
             <div>
                 {/*Render Different Component based on Route*/}
-                <Route path="/" component={Navbar}/>
+                <Route exact path="/" component={Navbar}/>
                 <Route path="/login" component={Login}/>
-                <Route path="/home" component={Home}/>
+                {/* <Route path="/home" component={Home}/> */}
                 <Route path="/register" component={Register}/>
-                <Route path="/profile" component={Profile}/>
+                {/* <Route path="/profile" component={Profile}/> */}
                 <Route path="/ownpost" component={OwnerPost}/>
-                <Route path="/ownerdash" component={OwnerDash}/>
-                <Route path="/travdash" component={TravDash}/>
+                {/* <Route path="/ownerdash" component={OwnerDash}/> */}
+                {/* <Route path="/travdash" component={TravDash}/> */}
             </div>
         )
     }
