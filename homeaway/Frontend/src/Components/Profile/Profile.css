@@ -1,0 +1,28 @@
+.container-profile {
+    /* width: 900px;
+    height: 900px;
+    overflow: hidden;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%; */
+
+    margin : 20px;
+    margin-left: 400px;
+    background: #f4f4f4 none repeat scroll 0 0;
+    width : 325px;
+    height: 325px;
+    border-radius: 50%;
+    text-align: center
+
+}
+
+
+.resize-img {
+    width:325px;
+    height:325px;
+    border-radius: 50%;
+    padding : 2px;
+    border: 5px;
+  }

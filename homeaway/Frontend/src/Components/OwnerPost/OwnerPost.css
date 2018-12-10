@@ -1,0 +1,52 @@
+.container-prop{
+
+    width: 900px;
+    height: 600px;
+    margin-left: 250px;
+    
+    }
+    
+   .container-sidebar{
+       width :400px;
+   } 
+
+    .sidebar{
+        width:400px;
+        height:350px;
+    }
+    
+    .list-group {
+         
+        float:left; 
+        padding-top:10px;
+        font-size: 20px;
+         width: 300px;
+       
+       }
+    
+     .form-address{
+        
+        width: 500px;
+        height: 600px;
+        margin-left: 150px;
+        margin-top: 10px;
+
+    
+       }
+
+       .panel-container{
+         width : 800px;
+         height : 900px;
+         background-color:#f7f7f8;
+         margin-left:350px;
+  
+       }
+
+       .container-prop{
+
+        padding:10px;
+        width: 600px;
+        height: 200px;
+        margin-left: 100px;
+        
+        }

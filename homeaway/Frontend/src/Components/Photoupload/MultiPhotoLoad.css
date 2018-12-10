@@ -1,0 +1,18 @@
+.container-multi{
+    margin : 10px;
+    /* background: #f4f4f4 none repeat scroll 0 0; */
+    width : 700px;
+    height: 400px;
+    border-color: blue;
+    text-align: center;
+
+  }
+
+  .upload-multi{
+    text-align: center;
+    padding : 250px;
+    border: solid;
+    border-color: rgb(198, 198, 202);
+    
+    
+  }

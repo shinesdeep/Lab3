@@ -1,0 +1,15 @@
+.profile-img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    padding : 2px;
+    border: 1px;
+  }
+
+  .navbar {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 0px;
+    border: 1px solid transparent;
+    opacity: 1;
+}

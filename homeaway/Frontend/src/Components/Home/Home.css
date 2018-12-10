@@ -1,0 +1,136 @@
+.jumbotron{
+    background-image: url('./large.jpg');
+    background-attachment: fixed;
+    background-position: center; 
+    background-repeat: no-repeat;
+    
+    text-align:center;
+    min-height: 95vh;
+    padding: top 0;
+    
+}
+.container-fluid{
+    padding:0 !important;
+}
+.col-xs-4{
+    background:rgba(157,52,99,0.7);    
+}
+
+
+
+.input-container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+   position: relative;
+   top:250px;
+
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    height: 50px;
+    padding: 6px 12px;
+    font-size: 18px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+
+.container-search{
+    width : 100%;
+    height:50%;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    min-width: 100px;
+    height:50px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+.main{
+    width: 800px;
+    height: 600px;
+    margin-left: 70px;
+    margin-top:100px;
+}
+
+.row-list{
+    
+
+    padding-top: 50px;
+    margin-top:50px;
+    margin-left:50px;
+    width:1200px;
+    height:280px;
+    background-color: #dbdbe0;
+    outline: 4px solid rgb(92, 90, 90);
+    outline-offset: 10px;
+}
+
+
+.row1{
+    padding-top: 50px;
+    margin-top:50px;
+    width:900px;
+    height:550px;
+    background-color: #f7f7f8;
+}
+
+
+.detail{
+    width: 1000px;
+    height: 500px;
+    margin-left: 100px;
+    margin-top:100px;
+
+}
+.propimage{
+
+    width:350px;
+    height:200px;
+    
+    padding : 2px;
+    border: 5px;
+}
+
+
+.container-searchbox{
+  padding-top: 20px;
+  padding-left: 20px;
+  text-align: center;
+  height: 100px;
+  width : 1220px;
+  background-color: #dbdbe0
+
+}
+

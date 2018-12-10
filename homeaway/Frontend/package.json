@@ -1,0 +1,33 @@
+{
+  "name": "homeaway",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "apollo-boost": "^0.1.22",
+    "axios": "^0.18.0",
+    "create-react-class": "^15.6.3",
+    "email-validator": "^2.0.4",
+    "graphql": "^14.0.2",
+    "moment": "^2.22.2",
+    "react": "^16.5.2",
+    "react-apollo": "^2.3.2",
+    "react-bootstrap": "^0.32.4",
+    "react-bootstrap-date-picker": "^5.1.0",
+    "react-cookie": "^3.0.4",
+    "react-cookies": "^0.1.0",
+    "react-date-range": "^1.0.0-beta",
+    "react-datepicker": "^1.6.0",
+    "react-dates": "^18.1.0",
+    "react-dom": "^16.5.2",
+    "react-responsive-carousel": "^3.1.42",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.5"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

@@ -1,0 +1,9 @@
+
+
+.alert-danger {
+  background-color: #ed605a;
+  border-color: transparent;
+  color: #fff;
+  padding: 20px;
+  font-size : 14px;
+}
