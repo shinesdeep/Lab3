@@ -234,7 +234,7 @@ class Profile extends Component{
         e.preventDefault();
         const data = {
             //id : user.id,
-            username: cookie.load('cookie'),
+            username: this.props.username,
             firstname : this.state.firstname,
             lastname : this.state.lastname,
             email : this.state.email,
@@ -252,7 +252,7 @@ class Profile extends Component{
         this.props.updateProfileMutation({
             variables : {
             //id : user.id,
-            username: cookie.load('cookie'),
+            username: this.props.username,
             firstname : this.state.firstname,
             lastname : this.state.lastname,
             email : this.state.email,
@@ -298,9 +298,9 @@ class Profile extends Component{
         console.log( "this.props ", this.props.getProfileQuery.getprofile);
 
         if(!cookie.load('cookie')){
-            console.log("Valid Cookie, Redirect to Home");
-            console.log("local stotage", localStorage.getItem("user_data"));
-            localStorage.setItem("user_data",null);
+            console.log("InValid Cookie, Redirect to Login");
+            //console.log("local stotage", localStorage.getItem("user_data"));
+            //localStorage.setItem("user_data",null);
             redirectVar = <Redirect to= "/login"/>
         }
         let loadchangeProfile = null;
