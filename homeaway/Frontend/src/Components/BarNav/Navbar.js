@@ -132,7 +132,12 @@ class BarNav extends Component {
         //console.log("localstorage", JSON.parse(localStorage.getItem("user")));
         //var userval = JSON.parse(localStorage.getItem("user"));
 
-     if(cookieVal){
+        if(this.state.showhome ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showHomePage = <Home ></Home>
+                           
+        }
+      if(cookieVal){
 
         if(this.state.showprofile ){
             console.log("username in show profile", cookie.load('cookie'));
@@ -146,11 +151,7 @@ class BarNav extends Component {
             console.log("username in show profile", cookie.load('cookie'));
             showOwner = <OwnerDash username={cookieVal.username}></OwnerDash>
         }
-        if(this.state.showhome ){
-            console.log("username in show profile", cookie.load('cookie'));
-            showHomePage = <Home username={cookieVal.username}></Home>
-                           
-        }
+       
        if(this.state.showlogin){
            showLoginPage = <Login></Login>
        }
