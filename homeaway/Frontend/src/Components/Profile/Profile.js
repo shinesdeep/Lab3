@@ -235,17 +235,17 @@ class Profile extends Component{
         const data = {
             //id : user.id,
             username: this.props.username,
-            firstname : this.state.firstname,
-            lastname : this.state.lastname,
-            email : this.state.email,
-            phone : this.state.phone,
-            aboutme: this.state.aboutme,
-            city : this.state.city,
-            company : this.state.company,
-            school : this.state.school,
-            home: this.state.home,
-            language : this.state.language,
-            gender: this.state.gender
+            firstname : this.state.firstname?this.state.firstname:this.props.getProfileQuery.getprofile.firstname,
+            lastname : this.state.lastname?this.state.lastname:this.props.getProfileQuery.getprofile.lastname,
+            email : this.state.email?this.state.email:this.props.getProfileQuery.getprofile.email,
+            phone : this.state.phone?this.state.phone:this.props.getProfileQuery.getprofile.phone,
+            aboutme: this.state.aboutme?this.state.aboutme:this.props.getProfileQuery.getprofile.aboutme,
+            city : this.state.city?this.state.city:this.props.getProfileQuery.getprofile.city,
+            company : this.state.company?this.state.company:this.props.getProfileQuery.getprofile.company,
+            school : this.state.school?this.state.school:this.props.getProfileQuery.getprofile.school,
+            home: this.state.home?this.state.home:this.props.getProfileQuery.getprofile.home,
+            language : this.state.language?this.state.language:this.props.getProfileQuery.getprofile.language,
+            gender: this.state.gender?this.state.gender:this.props.getProfileQuery.getprofile.gender
         }
         console.log("Profile save Request Data", data);
         console.log("this.props", this.props);
@@ -253,18 +253,24 @@ class Profile extends Component{
             variables : {
             //id : user.id,
             username: this.props.username,
-            firstname : this.state.firstname,
-            lastname : this.state.lastname,
-            email : this.state.email,
-            phone : this.state.phone,
-            aboutme: this.state.aboutme,
-            city : this.state.city,
-            company : this.state.company,
-            school : this.state.school,
-            home: this.state.home,
-            language : this.state.language,
-            gender: this.state.gender
-            }
+            firstname : this.state.firstname?this.state.firstname:this.props.getProfileQuery.getprofile.firstname,
+            lastname : this.state.lastname?this.state.lastname:this.props.getProfileQuery.getprofile.lastname,
+            email : this.state.email?this.state.email:this.props.getProfileQuery.getprofile.email,
+            phone : this.state.phone?this.state.phone:this.props.getProfileQuery.getprofile.phone,
+            aboutme: this.state.aboutme?this.state.aboutme:this.props.getProfileQuery.getprofile.aboutme,
+            city : this.state.city?this.state.city:this.props.getProfileQuery.getprofile.city,
+            company : this.state.company?this.state.company:this.props.getProfileQuery.getprofile.company,
+            school : this.state.school?this.state.school:this.props.getProfileQuery.getprofile.school,
+            home: this.state.home?this.state.home:this.props.getProfileQuery.getprofile.home,
+            language : this.state.language?this.state.language:this.props.getProfileQuery.getprofile.language,
+            gender: this.state.gender?this.state.gender:this.props.getProfileQuery.getprofile.gender
+            },
+            refetchQueries: [
+                {
+                  query: getProfileQuery,
+                  variables: { username: this.props.username }
+                }
+              ]
           
         });
         //set the with credentials to true
