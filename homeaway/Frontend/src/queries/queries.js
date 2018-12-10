@@ -17,9 +17,9 @@ const getTravDashQuery = gql`
 
  const geOwnerDashQuery = gql`
 
-    query($owner : String){
-        getownerdash(owner:$owner){
-           bookingId
+    query($username : String){
+        getownerdash(username:$username){
+           listingId
            headline
            propdes
            listingPic1

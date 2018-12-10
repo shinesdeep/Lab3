@@ -2,6 +2,7 @@ const graphql = require('graphql');
 var {mongoose} = require('../mongoose');
  var {Profiles} = require('../models/profile');
  var {Bookings} = require('../models/bookings');
+ var {Listings} = require('../models/listings');
  var crypt = require('../crypt');
  var session = require('express-session');
 const {
@@ -64,6 +65,36 @@ const BookingType = new GraphQLObjectType({
 });
 
 
+const ListingType = new GraphQLObjectType({
+    name: 'listing',
+    fields: () => ({
+        listingId :  {type: GraphQLString},
+        street :     {type: GraphQLString},
+        city :       {type: GraphQLString},
+        progBarVal : {type: GraphQLString},
+        states :     {type: GraphQLString},
+        country:     {type: GraphQLString},
+        headline:    {type: GraphQLString},
+        modify:      {type: GraphQLString},
+        username:    {type: GraphQLString},
+        propdes:     {type: GraphQLString},
+        bedrooms:    {type: GraphQLInt},
+        accomodates: {type: GraphQLInt},
+        price: {type: GraphQLString},
+        bathrooms:   {type: GraphQLString},
+        description: {type: GraphQLString},
+        listingPic1: {type: GraphQLString},
+        proptype:    {type: GraphQLString},
+        listingPic2: {type: GraphQLString},
+        listingPic3: {type: GraphQLString},
+        listingPic4: {type: GraphQLString},
+        listingPic5: {type: GraphQLString},
+        listingPic6: {type: GraphQLString},
+        
+    })
+});
+
+
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
@@ -86,12 +117,12 @@ const RootQuery = new GraphQLObjectType({
             }
         } ,
         getownerdash :{
-            type : new GraphQLList(BookingType),
+            type : new GraphQLList(ListingType),
             args : {username :{type : GraphQLString}},
             resolve(parent, args){
                 console.log("Get Owner Dashboard");
-                return Bookings.find({
-                    owner : args.username
+                return Listings.find({
+                    username : args.username
                 })
             }
         } 

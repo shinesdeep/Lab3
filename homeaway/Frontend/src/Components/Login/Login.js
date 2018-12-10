@@ -54,9 +54,7 @@ class Login extends Component{
         }
         //set the with credentials to true
         axios.defaults.withCredentials = true;
-        localStorage.setItem("user",null);
-        //make a post request with the user data
-      // console.log("Sending Login Request", data);
+       
         axios.post('http://localhost:3001/login',data)   
         .then(response => {
                 console.log("Status Code : ",response);
@@ -64,10 +62,9 @@ class Login extends Component{
                     this.setState({
                         errorFlag : false
                     });
-                    //localStorage.setItem("user_data",JSON.stringify(response.data.user));
+                    
                     console.log("Login Request Completed", response.data.user);
-                    localStorage.setItem("user",JSON.stringify(response.data.user));
-                    console.log("localStorage",JSON.parse(localStorage.getItem("user")));
+                    
                 }else{
                     
                     console.log("Login Error ");

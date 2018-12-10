@@ -89,8 +89,15 @@ app.post('/login',function(req,res){
                     crypt.compareHash(password, user.password, function (err, isMatch) {
                     if (isMatch && !err) {
                         user.password = null;
-                        console.log("user from mongo", user);
-                        res.cookie('cookie',username,{maxAge: 900000, httpOnly: false, path : '/'});
+                        var cookuser = {
+                            username : user.username,
+                            firstname : user.firstname,
+                            lastname : user.lastname,
+                            role : user.role
+                        };
+
+                        console.log("user from mongo", cookuser);
+                        res.cookie('cookie',JSON.stringify(cookuser),{maxAge: 900000, httpOnly: false, path : '/'});
                         req.session.user = user;
                         res.status(200).json({
                             success: true,

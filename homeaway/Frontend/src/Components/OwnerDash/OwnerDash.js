@@ -5,6 +5,8 @@ import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
 import {Link} from 'react-router-dom';
 import OwnerPost from '../OwnerPost/OwnerPost';
+import {graphql, compose} from 'react-apollo';
+import { geOwnerDashQuery} from '../../queries/queries';
 
 class OwnerDash extends Component {
   constructor(props){
@@ -26,70 +28,6 @@ class OwnerDash extends Component {
 
 
 
-componentDidMount(){
-
-  console.log("Inside component did mount"); 
-  const username = cookie.load('cookie');
-  console.log( "Username is ", username);
-  this.setState({username:username}) ;
-  // if(this.state.listingId)
-  // {
-//   axios.get('http://localhost:3001/owndash',{
-//        params: {
-//            username: username,
-           
-//          }
-//     }) 
-//    .then((response) => {
-
-//       // console.log("firstname in temp_res key",temp_resp.key )
-      
-//        console.log("Status Code : ",response.status);
-//        if(response.status === 200){
-//                console.log("Success Post");
-//                console.log(response.data);
-               
-               
-//               this.setState({listings : this.state.listings.concat(response.data)})
-//               console.log("listings :", this.state.listings);
-//        }else{
-               
-//               this.setState({errorFlag : true})
-//               console.log("Error in Response");
-
-//            }
-      
-       
-//        })
-//        .catch((error) => {
-//         // Error
-//         if (error.response) {
-  
-//             this.setState({
-//                 errorFlag : true
-//             })
-            
-//         } else if (error.request) {
-//             this.setState({
-//                 errorFlag : true
-//             })
-            
-//             console.log(error.request);
-//         } else {
-//             this.setState({
-//                 errorFlag : true
-//             })
-//             // Something happened in setting up the request that triggered an Error
-//             console.log('Error', error.message);
-//         }
-//         console.log(error.config);
-//         this.setState({
-//             errorFlag : true
-//         })
-//     });  
-        
-  
-}
 
 
 
@@ -107,7 +45,7 @@ componentDidMount(){
             redirectVar = <Redirect to= "/login"/>
   }
   
-   
+  console.log("this.props",this.props); 
 
 
   if(!this.state.modifyflag)
@@ -119,7 +57,7 @@ componentDidMount(){
     <button type="button" style={{marginLeft:"900px"}}class="btn btn-primary"><Link to="/ownpost" style={{color: 'white'}}>Create New Listing</Link> </button>
     </div> 
 
-    if(this.state.errorFlag){
+    if(!this.props.geOwnerDashQuery.getownerdash){
         errorlog = 
         <div>
           <br/>
@@ -129,14 +67,14 @@ componentDidMount(){
          </div>
          </div>
       }
-       if(this.state.listings){
+       if(this.props.geOwnerDashQuery.getownerdash){
     
         
     
         showlistings = 
         
            
-          this.state.listings.map((listing,index) => {
+        this.props.geOwnerDashQuery.getownerdash.map((listing,index) => {
           return(
              
               <row>
@@ -214,4 +152,16 @@ componentDidMount(){
 }
 
 }
-export default OwnerDash;
+export default compose(
+   
+    graphql(geOwnerDashQuery, { name: "geOwnerDashQuery" },{
+        options : (props) => {
+            return {
+                variables : {
+                    username : props.username
+                }
+            }
+        } 
+        }),
+    
+)(OwnerDash);

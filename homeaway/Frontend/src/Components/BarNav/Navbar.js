@@ -1,12 +1,12 @@
 import React,{Component} from 'react';
 import {Link} from 'react-router-dom';
 import cookie from 'react-cookies';
-import {Redirect} from 'react-router';
 import axios from 'axios';
 import './Navbar.css'
 import Profile from '../Profile/Profile';
 import TravDash from '../TravDash/TravDash';
 import OwnerDash from '../OwnerDash/OwnerDash';
+import {Redirect} from 'react-router';
 import Home from '../Home/Home';
 import Login from '../Login/Login';
 import {Nav, Navbar,NavDropdown,NavItem,MenuItem} from 'react-bootstrap';
@@ -99,37 +99,12 @@ class BarNav extends Component {
         
 
     }
-
-    componentDidMount(){
-        var username = cookie.load('cookie');
-        //user= JSON.parse(user);
-        let user = JSON.parse(localStorage.getItem("user"));
-
-
-        console.log("user in comp did mount",user);
-
-        if(user){
-            this.setState({
-                        
-                username : username,
-                firstname : user.firstname,
-                lastname : user.lastname,
-                role : user.role,
-                profile_pic : user.profile_pic,
-              }) 
-
-        }
-       
-
-    }
-    
-    
     
     //handle logout to destroy the cookie
     handleLogout = () => {
-        localStorage.setItem("user",null);
+        //localStorage.setItem("user",null);
         cookie.remove('cookie', { path: '/' });
-        console.log("after logout local stotage", JSON.parse(localStorage.getItem("user")));
+        //console.log("after logout local stotage", JSON.parse(localStorage.getItem("user")));
         this.setState({
             showprofile : false,
             username : '',
@@ -152,10 +127,35 @@ class BarNav extends Component {
         let showLoginPage = null;
 
         var cookieVal= cookie.load('cookie');
+        //console.log(" cookie user in comp did mount",cookieVal);
+        //console.log(" cookie firstname",cookieVal.firstname);
         //console.log("localstorage", JSON.parse(localStorage.getItem("user")));
-        var userval = JSON.parse(localStorage.getItem("user"));
+        //var userval = JSON.parse(localStorage.getItem("user"));
 
      if(cookieVal){
+
+        if(this.state.showprofile ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showProf = <Profile username={cookieVal.username}></Profile>
+        }
+        if(this.state.showtravel ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showTrav = <TravDash username={cookieVal.username}></TravDash>
+        }
+        if(this.state.showownerdash ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showOwner = <OwnerDash username={cookieVal.username}></OwnerDash>
+        }
+        if(this.state.showhome ){
+            console.log("username in show profile", cookie.load('cookie'));
+            showHomePage = <Home username={cookieVal.username}></Home>
+                           
+        }
+       if(this.state.showlogin){
+           showLoginPage = <Login></Login>
+       }
+
+
         if(this.state.profile_pic){
            profilepic = <img className="profile-img" src={`http://localhost:3001/uploads/${this.state.profile_pic}`}></img>
            
@@ -169,7 +169,7 @@ class BarNav extends Component {
 
 
 
-        if(this.state.role == 'Owner'){
+        if(cookieVal.role == 'Owner'){
           rolebasednav =
         
           <Nav>
@@ -199,7 +199,7 @@ class BarNav extends Component {
         <NavItem  onClick={this.showProfile} style={{color: "#9d9d9d"}} >
          {/* <Link to="/profile" onClick={this.showProfile} style={{color: "#9d9d9d"}}>{cookieVal} </Link> */}
         
-         {userval?(userval.firstname + " " + userval.lastname ): cookie.load('cookie')}
+         {cookieVal?(cookieVal.firstname + " " + cookieVal.lastname ): "Guest"}
 
        </NavItem>
 
@@ -218,30 +218,15 @@ class BarNav extends Component {
             //Else display login button
             console.log("Not Able to read cookie");
             navLogin = (
+                <div>
                 <ul class="nav navbar-nav navbar-right">
                         <li><Link to="/login"><span class="glyphicon glyphicon-log-in"></span> Login</Link></li>
                 </ul>
+                 <Redirect to= "/"/>
+                 </div>
             )
         }
-         if(this.state.showprofile ){
-            console.log("username in show profile", cookie.load('cookie'));
-            showProf = <Profile username={cookie.load('cookie')}></Profile>
-        }
-        if(this.state.showtravel ){
-            console.log("username in show profile", cookie.load('cookie'));
-            showTrav = <TravDash username={cookie.load('cookie')}></TravDash>
-        }
-        if(this.state.showownerdash ){
-            console.log("username in show profile", cookie.load('cookie'));
-            showOwner = <OwnerDash username={cookie.load('cookie')}></OwnerDash>
-        }
-        if(this.state.showhome ){
-            console.log("username in show profile", cookie.load('cookie'));
-            showHomePage = <Home username={cookie.load('cookie')}></Home>
-        }
-       if(this.state.showlogin){
-           showLoginPage = <Login></Login>
-       }
+         
              
         
      return(
@@ -259,7 +244,8 @@ class BarNav extends Component {
             <Navbar.Collapse>
             <Nav>
             <NavItem  onClick={this.showHome} style={{color: "#9d9d9d"}} >
-                {/* <Link to="/home" style={{color: "#9d9d9d"}}>Home</Link> */}
+                 {/* <Link to="/home" style={{color: "#9d9d9d"}}>Home</Link>  */}
+                
               Home
             </NavItem>
       {/* eventKey={3.1} href="/profile"  */}
@@ -284,6 +270,7 @@ class BarNav extends Component {
       {showProf}
       {showTrav}
       {showOwner}
+      
       {/* {showLoginPage} */}
      
         </div>
