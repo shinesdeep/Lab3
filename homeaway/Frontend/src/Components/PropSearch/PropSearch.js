@@ -44,7 +44,7 @@ class PropSearch extends Component {
     
     let alllistings = null;
     let detailview = null;
-  
+   let showcount = null;
    
     console.log("this.props", this.props);
 
@@ -63,7 +63,11 @@ class PropSearch extends Component {
     
    if(this.state.showlistings){
 
+     showcount =    <h3 style={{textAlign:"center"}}> {this.props.getPropSearchQuery.propsearch?this.props.getPropSearchQuery.propsearch.length:0} Listings found..... </h3> 
+
+
     if(this.props.getPropSearchQuery.propsearch){
+        
 
 
         alllistings = 
@@ -108,8 +112,7 @@ else{
    
    {detailview}
 
-   <h3 style={{textAlign:"center"}}> {this.props.getPropSearchQuery.propsearch?this.props.getPropSearchQuery.propsearch.length:0} Listings found..... </h3> 
-  
+    {showcount} 
    {alllistings}
    
     </div>    

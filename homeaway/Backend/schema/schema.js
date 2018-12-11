@@ -183,7 +183,6 @@ const Mutation = new GraphQLObjectType({
                 username : {type: GraphQLString},
                 firstname:{type: GraphQLString },
                 lastname:{type: GraphQLString },
-                //email:{type: GraphQLString },
                 phone : {type: GraphQLString },
                 aboutme : {type: GraphQLString },
                 city : {type: GraphQLString },
@@ -196,26 +195,11 @@ const Mutation = new GraphQLObjectType({
        
            },
            resolve(parent, args){
-            var profile = new Profiles({
-                firstname:args.firstname,
-                lastname:args.lastname,
-                //email:args.email,
-                phone : args.phone,
-                aboutme : args.aboutme,
-                city : args.city,
-                company : args.company,
-                school : args.school,
-                home : args.home,
-                language : args.language,
-                gender : args.gender,
-           })
-           console.log("Book", args.username);
+            console.log("Update profile");
             return Profiles.findOneAndUpdate({
                 username:args.username
             }, { $set: { firstname:args.firstname,lastname:args.lastname, phone: args.phone , city: args.city, aboutme  : args.aboutme,
                 company: args.company, school : args.school, home : args.home,language : args.language, gender : args.gender,}} ) 
-
-
 
          }
      },
@@ -271,13 +255,13 @@ const Mutation = new GraphQLObjectType({
                 listingPic5: args.listingPic5,
                 listingPic6: args.listingPic6,
             });
-            console.log("Book Property ");
+            console.log("Book Property ...");
             return booking.save();
-         
+           
          
          }
      }
-     //next mutation
+     
  }
  
 })
