@@ -134,7 +134,7 @@ class BarNav extends Component {
 
         if(this.state.showhome ){
             console.log("username in show profile", cookie.load('cookie'));
-            showHomePage = <Home ></Home>
+            showHomePage = <Home username ={cookieVal.username}></Home>
                            
         }
       if(cookieVal){

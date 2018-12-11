@@ -49,8 +49,8 @@ const BookingType = new GraphQLObjectType({
         price: {type: GraphQLString},
         headline: {type: GraphQLString},
         propdes: {type: GraphQLString},
-        bedrooms: {type: GraphQLInt},
-        accomodates: {type: GraphQLInt},
+        bedrooms: {type: GraphQLString},
+        accomodates: {type: GraphQLString},
         bathrooms: {type: GraphQLString},
         description: {type: GraphQLString},
         listingPic1: {type: GraphQLString},
@@ -78,8 +78,8 @@ const ListingType = new GraphQLObjectType({
         modify:      {type: GraphQLString},
         username:    {type: GraphQLString},
         propdes:     {type: GraphQLString},
-        bedrooms:    {type: GraphQLInt},
-        accomodates: {type: GraphQLInt},
+        bedrooms:    {type: GraphQLString},
+        accomodates: {type: GraphQLString},
         price: {type: GraphQLString},
         bathrooms:   {type: GraphQLString},
         description: {type: GraphQLString},
@@ -125,7 +125,19 @@ const RootQuery = new GraphQLObjectType({
                     username : args.username
                 })
             }
-        } 
+        } ,
+        propsearch :{
+            type : new GraphQLList(ListingType),
+            args : {accomodates :{type : GraphQLString}},
+            resolve(parent, args){
+                console.log("Get Prop Search ", args.accomodates);
+                //, accomodates:{$gte: args.accomodates}
+                return Listings.find({
+                    progBarVal :'100%'
+                })
+            }
+        },
+
     }
 });
 
@@ -197,7 +209,7 @@ const Mutation = new GraphQLObjectType({
                 language : args.language,
                 gender : args.gender,
            })
-           console.log("Update profile", args.username);
+           console.log("Book", args.username);
             return Profiles.findOneAndUpdate({
                 username:args.username
             }, { $set: { firstname:args.firstname,lastname:args.lastname, phone: args.phone , city: args.city, aboutme  : args.aboutme,
@@ -207,6 +219,64 @@ const Mutation = new GraphQLObjectType({
 
          }
      },
+      bookProp: {
+         type : BookingType,
+         args: {
+            
+            listingId : {type: GraphQLString},
+            startDate : {type: GraphQLString},
+            endDate :   {type: GraphQLString},
+            owner :     {type: GraphQLString},
+            guest:      {type: GraphQLString},
+            username:   {type: GraphQLString},
+            price:      {type: GraphQLString},
+            headline:   {type: GraphQLString},
+            propdes:    {type: GraphQLString},
+            bedrooms:   {type: GraphQLString},
+            accomodates: {type: GraphQLString},
+            bathrooms:   {type: GraphQLString},
+            description: {type: GraphQLString},
+            listingPic1: {type: GraphQLString},
+            proptype:    {type: GraphQLString},
+            listingPic2: {type: GraphQLString},
+            listingPic3: {type: GraphQLString},
+            listingPic4: {type: GraphQLString},
+            listingPic5: {type: GraphQLString},
+            listingPic6: {type: GraphQLString},
+         },
+         resolve(parent, args){
+            
+            var bookingId = Math.random().toString(36).substr(2, 9); 
+           
+            var booking = new Bookings({
+                bookingId : bookingId,
+                listingId : args.listingId,
+                startDate : args.startDate,
+                endDate :   args.endDate,
+                owner :     args.owner,
+                guest:      args.guest,
+                username:   args.username,
+                price:      args.price,
+                headline:   args.headline,
+                propdes:    args.propdes,
+                bedrooms:   args.bedrooms,
+                accomodates: args.accomodates,
+                bathrooms:   args.bathrooms,
+                description: args.description,
+                listingPic1: args.listingPic1,
+                proptype:    args.proptype,
+                listingPic2: args.listingPic2,
+                listingPic3: args.listingPic3,
+                listingPic4: args.listingPic4,
+                listingPic5: args.listingPic5,
+                listingPic6: args.listingPic6,
+            });
+            console.log("Book Property ");
+            return booking.save();
+         
+         
+         }
+     }
      //next mutation
  }
  
@@ -216,3 +286,6 @@ module.exports = new GraphQLSchema({
     query: RootQuery,
     mutation: Mutation
 });
+
+
+

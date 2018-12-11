@@ -10,6 +10,8 @@ import { Carousel } from "react-responsive-carousel"
 import axios from 'axios';
 import cookie from 'react-cookies';
 import {Redirect} from 'react-router';
+import {graphql, compose} from 'react-apollo';
+import {bookPropMutation} from '../../mutation/mutations';
 
 class DetailView extends Component {
 
@@ -73,65 +75,103 @@ bookingHandler(e){
   else{
     var startDate = moment(this.state.startDate).format('MM/DD/YYYY'); 
     var endDate = moment(this.state.startDate).format('MM/DD/YYYY');
-
+    let username = this.props.username;
 
     const data = {
-        username : cookie.load('cookie'),
+        username : username,
         guest : this.state.guest,
         startDate : startDate,
         endDate : endDate,
+        owner : this.state.listing.username,
         listingId : this.state.listing.listingId,
         headline : this.state.listing.headline,
         propdes : this.state.listing.propdes,
         price : this.state.listing.price,
-        listingPic1 : this.state.listing.listingPic1
+        listingPic1 : this.state.listing.listingPic1,
+        bedrooms:this.state.listing.bedrooms,
+        accomodates:this.state.listing.accomodates,
+        bathrooms:this.state.listing.bathrooms,
+        description:this.state.listing.description,
+        proptype:this.state.listing.proptype,
+        listingPic2:this.state.listing.listingPic2,
+        listingPic3:this.state.listing.listingPic3,
+        listingPic4:this.state.listing.listingPic4,
+        listingPic5:this.state.listing.listingPic5,
+        listingPic6:this.state.listing.listingPic6,
     }
     console.log("Booking Request Data", data);
-    //set the with credentials to true
-    axios.defaults.withCredentials = true;
-    //make a post request with the user data
-    axios.post('http://localhost:3001/book',data)
-        .then(response => {
-            console.log("Status Code : ",response.status);
-            if(response.status === 200){
-                this.setState({
-                    successflag : true
-                })
-                console.log("Success Post");
-            }else{
-                
-                this.setState({
-                    errorflag : true
-                })
-                console.log("Failure Post");
-            }
-        })
-        .catch((error) => {
-            // Error
-            if (error.response) {
+    
+    this.props.bookPropMutation({
+        variables : {
+            username : this.props.username,
+            guest : this.state.guest,
+            startDate : this.state.startDate,
+            endDate : this.state.endDate,
+            owner : this.state.listing.username,
+            listingId : this.state.listing.listingId,
+            headline : this.state.listing.headline,
+            propdes : this.state.listing.propdes,
+            price : this.state.listing.price,
+            listingPic1 : this.state.listing.listingPic1,
+            bedrooms:this.state.listing.bedrooms,
+            accomodates:this.state.listing.accomodates,
+            bathrooms:this.state.listing.bathrooms,
+            description:this.state.listing.description,
+            proptype:this.state.listing.proptype,
+            listingPic2:this.state.listing.listingPic2,
+            listingPic3:this.state.listing.listingPic3,
+            listingPic4:this.state.listing.listingPic4,
+            listingPic5:this.state.listing.listingPic5,
+            listingPic6:this.state.listing.listingPic6,
+        }
+      
+    });
 
-                this.setState({
-                    errorflag : true
-                })
+    //set the with credentials to true
+    // axios.defaults.withCredentials = true;
+    // //make a post request with the user data
+    // axios.post('http://localhost:3001/book',data)
+    //     .then(response => {
+    //         console.log("Status Code : ",response.status);
+    //         if(response.status === 200){
+    //             this.setState({
+    //                 successflag : true
+    //             })
+    //             console.log("Success Post");
+    //         }else{
                 
-            } else if (error.request) {
-                this.setState({
-                    errorflag : true
-                })
+    //             this.setState({
+    //                 errorflag : true
+    //             })
+    //             console.log("Failure Post");
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         // Error
+    //         if (error.response) {
+
+    //             this.setState({
+    //                 errorflag : true
+    //             })
                 
-                console.log(error.request);
-            } else {
-                this.setState({
-                    errorflag : true
-                })
-                // Something happened in setting up the request that triggered an Error
-                console.log('Error', error.message);
-            }
-            console.log(error.config);
-            this.setState({
-                errorflag : true
-            })
-        });
+    //         } else if (error.request) {
+    //             this.setState({
+    //                 errorflag : true
+    //             })
+                
+    //             console.log(error.request);
+    //         } else {
+    //             this.setState({
+    //                 errorflag : true
+    //             })
+    //             // Something happened in setting up the request that triggered an Error
+    //             console.log('Error', error.message);
+    //         }
+    //         console.log(error.config);
+    //         this.setState({
+    //             errorflag : true
+    //         })
+    //     });
 
         
         
@@ -145,7 +185,8 @@ bookingHandler(e){
  render(){
  const { focusedInput, startDate, endDate } = this.state;  
  let  redirectVar = null;  
- let successlog = null
+ let successlog = null;
+ console.log("this.props in detailview",this.props);
  if(this.state.redirect)
  {
     redirectVar = <Redirect to= "/login"/>
@@ -296,4 +337,10 @@ if(this.state.successflag)
 }
 
 }
-export default DetailView;
+
+export default compose(
+    graphql(bookPropMutation, { name: "bookPropMutation" }),
+    
+)(DetailView);
+
+

@@ -54,4 +54,33 @@ const getProfileQuery = gql`
     }
  `  ;
 
-export { getTravDashQuery, geOwnerDashQuery,getProfileQuery};
+ const getPropSearchQuery = gql`
+
+    query($accomodates : String ){
+        propsearch(accomodates:$accomodates){
+            
+        username  
+        listingId 
+        headline 
+        propdes 
+        price 
+        listingPic1 
+        bedrooms
+        accomodates
+        bathrooms
+        description
+        proptype
+        listingPic2
+        listingPic3
+        listingPic4
+        listingPic5
+        listingPic6
+           
+        }
+ 
+    }
+ `  ;
+
+ 
+
+export { getTravDashQuery, geOwnerDashQuery,getProfileQuery, getPropSearchQuery};

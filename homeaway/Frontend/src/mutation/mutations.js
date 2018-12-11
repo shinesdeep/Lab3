@@ -34,6 +34,33 @@ const updateProfileMutation = gql`
 }
 `;
 
+const bookPropMutation = gql`
+ mutation bookProp( $listingId : String, $startDate :String,$endDate:String, $owner : String, $guest: String, $username: String, $price: String, $headline: String, $propdes: String, $bedrooms: String, $accomodates: String, $bathrooms: String, $description: String, $listingPic1: String, $proptype: String, $listingPic2: String, $listingPic3: String, $listingPic4: String, $listingPic5: String, $listingPic6: String,){
+    bookProp(listingId :$listingId, startDate : $startDate,endDate : $endDate, owner : $owner,  guest: $guest, username: $username, price: $price, headline: $headline, propdes: $propdes, bedrooms: $bedrooms, accomodates: $accomodates, bathrooms: $bathrooms, description: $description, listingPic1: $listingPic1, proptype: $proptype, listingPic2: $listingPic2, listingPic3: $listingPic3, listingPic4: $listingPic4, listingPic5: $listingPic5, listingPic6: $listingPic6,){
+        username 
+        guest 
+        startDate 
+        endDate 
+        owner 
+        listingId 
+        headline 
+        propdes 
+        price 
+        listingPic1 
+        bedrooms
+        accomodates
+        bathrooms
+        description
+        proptype
+        listingPic2
+        listingPic3
+        listingPic4
+        listingPic5
+        listingPic6
+      }
+}
+`;
 
-export {registerMutation, updateProfileMutation};
+
+export {registerMutation, updateProfileMutation,bookPropMutation};
 

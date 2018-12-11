@@ -1,0 +1,44 @@
+.propimage{
+
+    width:350px;
+    height:200px;
+    
+    padding : 2px;
+    border: 5px;
+}
+
+
+.row-list{
+    padding-top: 50px;
+    margin-top:50px;
+    margin-left:50px;
+    width:1200px;
+    height:280px;
+    background-color: #dbdbe0;
+    outline: 4px solid rgb(92, 90, 90);
+    outline-offset: 10px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    min-width: 100px;
+    height:50px;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}

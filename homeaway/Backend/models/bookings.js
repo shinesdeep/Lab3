@@ -2,18 +2,12 @@ var mongoose = require('mongoose');
 
 var Bookings = mongoose.model('Bookings',{
     bookingId :{
-        type : String,
-        unique : true, 
-        required : true, 
-        
+        type : String,   
     },
     listingId : {
         type : String
     },
-    messages : [{
-        sender :{type : String },
-        message:{type: String }
-     }],
+    
     startDate : {
         type : String
     },
@@ -39,10 +33,10 @@ var Bookings = mongoose.model('Bookings',{
         type : String
     },
     bedrooms : {
-        type : Number
+        type : String
     },
     accomodates : {
-        type : Number
+        type : String
     },
     bathrooms : {
         type : String

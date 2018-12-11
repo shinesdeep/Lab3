@@ -29,10 +29,10 @@ var Listings = mongoose.model('Listings',{
         type : String
     },
     bedrooms : {
-        type : Number
+        type : String
     },
     accomodates : {
-        type : Number
+        type : String
     },
     bathrooms : {
         type : String
