@@ -20,8 +20,7 @@ class DetailView extends Component {
         
         this.state = {
             focusedInput: null,
-            // startDate: moment(),
-            // endDate: moment(),
+            
             listing : this.props.list,
             startDate : this.props.startDate,
             endDate : this.props.endDate,
@@ -30,8 +29,7 @@ class DetailView extends Component {
             detaillisting:null,
             dest: null,
             redirect : false,
-            errorFlag :false,
-            
+            errorFlag :false,  
             
           };
       
@@ -49,18 +47,21 @@ class DetailView extends Component {
           startDate : startDate,
           endDate : endDate,
           emptyfield :false,
+          successflag: false,
+          
         });
       }
     
     onFocusChange(focusedInput) {
         this.setState({ focusedInput });
+        
       }
 
 
       guestChange = (e) => {
         this.setState({
             guest : e.target.value,
-            
+            successflag: false,
         })
     }
 
@@ -124,9 +125,12 @@ bookingHandler(e){
             listingPic5:this.state.listing.listingPic5,
             listingPic6:this.state.listing.listingPic6,
         }
-      
+    
     });
-
+    
+     this.setState({
+         successflag:true,
+    });
     //set the with credentials to true
     // axios.defaults.withCredentials = true;
     // //make a post request with the user data
@@ -200,10 +204,12 @@ if(this.state.successflag)
         <div class="alert alert-success" role="alert">
         <h2>Your Booking is Successful.</h2>
         </div>
-        <Redirect to= "/travdash"/>
+        <Redirect to= "/"/>
      </div>   
     
 }
+
+
 
    return(
 

@@ -134,7 +134,7 @@ class BarNav extends Component {
 
         if(this.state.showhome ){
             console.log("username in show profile", cookie.load('cookie'));
-            showHomePage = <Home username ={cookieVal.username}></Home>
+            showHomePage = <Home ></Home>
                            
         }
       if(cookieVal){
@@ -175,7 +175,7 @@ class BarNav extends Component {
         
           <Nav>
           <NavItem  >
-          <Link to="/ownpost" style={{color: "#9d9d9d"}}> List Property</Link>
+          {/* <Link to="/ownpost" style={{color: "#9d9d9d"}}> List Property</Link> */}
            </NavItem>
 
            <NavItem  onClick={this.showOwnerdash} style={{color: "#9d9d9d"}}>

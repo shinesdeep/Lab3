@@ -16,18 +16,22 @@ class PropSearch extends Component {
       this.state = {
          detailsearch : false,
          showlistings : true,
+         username : null,
       }
       //Bind the handlers to this class
       // this.onclickHandler = this.onclickHandler.bind(this);
   }
   detailsprop = (listing) => {
-    
+    let username = null;
     console.log("listing", listing ) ;
-
+    if(cookie.load('cookie')){
+        username = cookie.load('cookie').username;
+  }
     this.setState({
         detaillisting:listing,
         detailsearch : true,
         showlistings : false,
+        username : username
         
     })
 
@@ -50,7 +54,7 @@ class PropSearch extends Component {
         startDate = {this.props.startDate} 
         endDate = {this.props.endDate} 
         guest = {this.props.guest}
-        username = {this.props.username}
+        username = {this.state.username}
         ></DetailView>
 
    console.log("props username", this.props.username);
